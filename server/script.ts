@@ -24,6 +24,6 @@ export namespace P_3_1Server {
         _response.setHeader("Access-Control-Allow-Origin", "*");
         _response.write(_request.url); //gibt antwort zurück /url der antwort
         _response.end();
-        //gibt zugriffserlaubnis
+                                                                                                    //gibt zugriffserlaubnis
     }
 }
