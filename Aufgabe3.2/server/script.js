@@ -17,23 +17,21 @@ var P_3_2Server;
         console.log("Listening");
     }
     function handleRequest(_request, _response) {
-        console.log("I hear voices!");
         console.log(_request.url);
-        //Header hat Meta Angaben und Steuerungs Elemente
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
-        _response.write(_request.url);
-        _response.end();
-        if (_request.url) { //wenn wir request (Parameter) bekommen, dann
+        if (_request.url) {
             let url = Url.parse(_request.url, true);
-            if (url.pathname == "/html") {
+            let path = url.pathname;
+            if (path == "/html") {
                 for (let key in url.query) {
                     _response.write(key + ":" + url.query[key]);
                 }
             }
-            if (url.pathname == "/json") {
-                console.log(JSON.stringify(url.query));
-                _response.write(JSON.stringify(url.query));
+            if (path == "/json") {
+                let sentObject = JSON.stringify(url.query);
+                console.log(sentObject);
+                _response.write(sentObject);
             }
         }
         _response.end();
