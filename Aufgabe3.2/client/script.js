@@ -10,7 +10,7 @@ var P_3_2Server;
         //    console.log("name: " + entry[0]);
         //    console.log("value: " + entry[1]);
         //}
-        let _url = "https://gissose21.herokuapp.com/";
+        let _url = "https://gissose21.herokuapp.com";
         _url += "/html";
         // tslint:disable-next-line: no-any
         let query = new URLSearchParams(formData);
@@ -27,7 +27,7 @@ var P_3_2Server;
         //    console.log("name: " + entry[0]);
         //    console.log("value: " + entry[1]);
         //}
-        let _url = "https://gissose21.herokuapp.com/";
+        let _url = "https://gissose21.herokuapp.com";
         _url += "/json";
         // tslint:disable-next-line: no-any
         let query = new URLSearchParams(formData);
