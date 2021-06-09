@@ -18,20 +18,22 @@ var P_3_2Server;
     }
     function handleRequest(_request, _response) {
         console.log(_request.url);
-        _response.setHeader("content-type", "text/html; charset=utf-8");
+        //ändern damit es zum json passt (Contenttype). Man sagt dem PC das man eine Antwort vom Typ JSON sendet.         
         _response.setHeader("Access-Control-Allow-Origin", "*");
         if (_request.url) {
             let url = Url.parse(_request.url, true);
             let path = url.pathname;
-            if (path == "/html") {
+            if (path == "/html") { //Wenn am ende /html angehängt wurde
+                _response.setHeader("content-type", "text/html; charset=utf-8");
                 for (let key in url.query) {
-                    _response.write(key + ":" + url.query[key]);
+                    _response.write("<p>" + key + ":" + url.query[key] + "</p>"); //author: melanie wird ausgegeben, vom package.json
                 }
             }
             if (path == "/json") {
-                let sentObject = JSON.stringify(url.query);
+                _response.setHeader("content-type", "application/json");
+                let sentObject = JSON.stringify(url.query); //json in string umwandeln
                 console.log(sentObject);
-                _response.write(sentObject);
+                _response.write(sentObject); //bei /json wird string ausgegeben
             }
         }
         _response.end();
