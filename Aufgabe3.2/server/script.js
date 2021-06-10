@@ -21,12 +21,12 @@ var P_3_2Server;
         //ändern damit es zum json passt (Contenttype). Man sagt dem PC das man eine Antwort vom Typ JSON sendet.         
         _response.setHeader("Access-Control-Allow-Origin", "*");
         if (_request.url) {
-            let url = Url.parse(_request.url, true);
+            let url = Url.parse(_request.url, true); //URL wird zum String umgewandelt. Kein json deshalb kein stringify
             let path = url.pathname;
             if (path == "/html") { //Wenn am ende /html angehängt wurde
                 _response.setHeader("content-type", "text/html; charset=utf-8");
                 for (let key in url.query) {
-                    _response.write("<p>" + key + ":" + url.query[key] + "</p>"); //author: melanie wird ausgegeben, vom package.json
+                    _response.write("<p>" + key + ":" + url.query[key] + "</p>"); //name: melanie wird ausgegeben, vom Interface
                 }
             }
             if (path == "/json") {
