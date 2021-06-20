@@ -26,9 +26,9 @@ namespace P_3_4Server {
 
     }
 
-    let sendButtonHTML: HTMLButtonElement = <HTMLButtonElement>document.getElementById("sendbutton");
+    let sendButtonHTML: HTMLButtonElement = <HTMLButtonElement>document.getElementById("sendButton"); //nicht nötig
     sendButtonHTML.addEventListener("click", sendData);
-    let sendButtonJSON: HTMLButtonElement = <HTMLButtonElement>document.getElementById("getbutton");
+    let sendButtonJSON: HTMLButtonElement = <HTMLButtonElement>document.getElementById("getButton");
     sendButtonJSON.addEventListener("click", getData);
     //Beim Button klick wird Variable erstellt. Und gesagt mit welchem Server kommuniziert wird (URL)
 }

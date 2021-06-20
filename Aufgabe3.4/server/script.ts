@@ -26,7 +26,7 @@ export namespace P_3_4Server {
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);                        //URL wird zum String umgewandelt. Kein json deshalb kein stringify
             let path: string = <string>url.pathname;
-            let input: Data = { name: url.query.name + "", mail: url.query.mail + "", subject: url.query.subject + "" };
+            let input: Data = { name: url.query.name + "", mail: url.query.email + "", subject: url.query.subject + "" };
             if (path == "/sendData") {                                                                  //Wenn am ende /html angehängt wurde
                 let data: string = await sendDatabaseData(databaseURL, input);
                 _response.write(data);
