@@ -8,7 +8,10 @@ namespace P_3_4Server {
         url += "/sendData";                                                                         // /html wir an url gehängt
         //tslint:disable-next-line: no-any
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        url = url + "?" + query.toString();                                                     //HTML wir in einem String ausgegeben
+        url = url + "?" + query.toString();   
+        let answer: Response = await fetch(url);
+        console.log(answer);
+                                                          //HTML wir in einem String ausgegeben
     }
     async function getData(): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);

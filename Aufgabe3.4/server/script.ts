@@ -34,6 +34,8 @@ export namespace P_3_4Server {
             else if (path == "/getData") {
                 let data: Data[] = await getDatabaseData(databaseURL);
                 _response.write(JSON.stringify(data));
+                console.log(data);
+                
             }
         }
         _response.end();
