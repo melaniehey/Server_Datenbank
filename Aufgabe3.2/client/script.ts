@@ -35,8 +35,8 @@ namespace P_3_2Server {
     sendButtonHTML.addEventListener("click", sendDataHTML);
     let sendButtonJSON: HTMLButtonElement = <HTMLButtonElement>document.getElementById("jsonbutton");
     sendButtonJSON.addEventListener("click", sendDataJSON);
-    //Beim Button klick wird Variable erstellt. Und gesagt mit welchem Server kommuniziert wird (URL)
-    //URL wird mit /html und /json außeinandergehalten 
+                                                                                                //Beim Button klick wird Variable erstellt. Und gesagt mit welchem Server kommuniziert wird (URL)
+                                                                                                //URL wird mit /html und /json außeinandergehalten 
 
     interface JsonAnswer {
         name: string;
