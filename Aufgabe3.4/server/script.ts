@@ -16,7 +16,7 @@ export namespace P_3_4Server {
         server.addListener("request", handleRequest);
         server.listen(_port);
     }
-    let databaseURL: string = "mongodb+srv://mylany:<passwordabc>@giscluster.4mjef.mongodb.net/Abgabe3_4?retryWrites=true&w=majority";
+    let databaseURL: string = "mongodb+srv://mylany:passwordabc@giscluster.4mjef.mongodb.net/Abgabe3_4?retryWrites=true&w=majority";
 
     async function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
         //ändern damit es zum json passt (Contenttype). Man sagt dem PC das man eine Antwort vom Typ JSON sendet.         
