@@ -8,10 +8,10 @@ namespace P_3_4Server {
         url += "/sendData";                                                                         // /html wir an url gehängt
         //tslint:disable-next-line: no-any
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        url = url + "?" + query.toString();   
+        url = url + "?" + query.toString();
         let answer: Response = await fetch(url);
         console.log(answer);
-        
+
     }
     async function getData(): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);
@@ -26,9 +26,7 @@ namespace P_3_4Server {
 
     }
 
-    let sendButtonHTML: HTMLButtonElement = <HTMLButtonElement>document.getElementById("sendButton"); //nicht nötig
-    sendButtonHTML.addEventListener("click", sendData);
-    let sendButtonJSON: HTMLButtonElement = <HTMLButtonElement>document.getElementById("getButton");
-    sendButtonJSON.addEventListener("click", getData);
+    document.getElementById("sendButton").addEventListener("click", sendData);
+    document.getElementById("getButton").addEventListener("click", getData);
     //Beim Button klick wird Variable erstellt. Und gesagt mit welchem Server kommuniziert wird (URL)
 }
