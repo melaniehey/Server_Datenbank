@@ -1,0 +1,111 @@
+/* body {
+    background-color: mediumpurple;
+    max-width       : 800px; 
+    margin          : auto;
+} */
+.playMemory {
+    padding         : 10px;
+    background      : white;
+    color           : #000000;
+    border          : 2px solid white;
+    /* border-radius: 5px; */
+    font-size       : 16px;
+    font-family     : Georgia, 'Times New Roman', serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin    : 0;
+    background: radial-gradient(#9e45f1, #bb1eeb);
+    max-width : 1000px;
+    margin    : auto
+}
+
+html {
+    min-height: 100vh;
+    /*damit der hintergrunf farbverlauf funktioniert*/
+}
+
+@font-face {
+    font-family: "MemoryGame";
+    src        : url("Exo_2/Exo2_Italic-VariableFont_wght.ttf") fromat("ttf");
+}
+
+.title {
+    font-family: MemoryGame, sans-serif;
+    text-align : center;
+    font-size  : 90px;
+    padding    : 10px;
+    background : white;
+    color      : #000000;
+    /* border  : 2px solid white; */
+    /* margin  : auto; */
+}
+
+.gameinfo {
+    font-family: sans-serif;
+    color      : white;
+    font-size  : 30px;
+}
+
+.cards {
+    background-color: rgb(224, 245, 39);
+    height          : 150px;
+    width           : 150px;
+    background-size : contain;
+}
+
+.game,
+#cardStorage {
+    display              : grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap             : 10px;
+    margin               : 50px;
+    justify-content      : center;
+
+}
+
+.gameinfos {
+    grid-column    : 1 / -1;
+    display        : flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .game {
+        grid-template-columns: repeat(2, auto);
+    }
+
+    .gameinfos {
+        flex-direction: column;
+        align-items   : center;
+    }
+}
+
+.pair_0 {
+    background-image: url("Images/raccoon.jpg");
+}
+.pair_1 {
+    background-image: url("Images/chicken.jpg");
+}
+.pair_2 {
+    background-image: url("Images/dogBubble.jpg");
+}
+.pair_3 {
+    background-image: url("Images/dogGangsta.jpg");
+}
+.pair_4 {
+    background-image: url("Images/dogTounge.jpg");
+}
+.pair_5 {
+    background-image: url("Images/frog.jpg");
+}
+.pair_6 {
+    background-image: url("Images/rat.jpg");
+}
+.pair_7 {
+    background-image: url("Images/tele.jpg");
+}

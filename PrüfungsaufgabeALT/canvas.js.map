@@ -1,0 +1,1 @@
+{"version":3,"file":"canvas.js","sourceRoot":"","sources":["canvas.ts"],"names":[],"mappings":";AAAA,IAAU,eAAe,CASxB;AATD,WAAU,eAAe;IACrB,IAAI,MAAM,GAAyC,QAAQ,CAAC,cAAc,CAAC,UAAU,CAAC,CAAC;IACvF,IAAI,OAAO,GAA6B,MAAM,CAAC,UAAU,CAAC,IAAI,CAAC,CAAC;IAEhE,YAAY;IACZ,mCAAmC;IACnC,yEAAyE;IACzE,oCAAoC;IACpC,sCAAsC;AAC1C,CAAC,EATS,eAAe,KAAf,eAAe,QASxB"}
