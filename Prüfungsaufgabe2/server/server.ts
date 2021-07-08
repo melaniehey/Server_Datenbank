@@ -15,7 +15,7 @@ export namespace Prüfungsabgabe {
 
     startServer(port);
 
-    let databaseURL: string = "mongodb+srv://mylany:passwordabc@giscluster.4mjef.mongodb.net/Abgabe3_4?retryWrites=true&w=majority";
+    let databaseURL: string = "mongodb+srv://mylany:passwordabc@giscluster.4mjef.mongodb.net/Prüfungsabgabe?retryWrites=true&w=majority";
 
     databaseConnected(databaseURL); //login information
 

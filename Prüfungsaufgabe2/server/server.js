@@ -11,7 +11,7 @@ var Prüfungsabgabe;
     if (!port)
         port = 8100; //Port wird auf 8100 gesetzt (localhost:8100)
     startServer(port);
-    let databaseURL = "mongodb+srv://mylany:passwordabc@giscluster.4mjef.mongodb.net/Abgabe3_4?retryWrites=true&w=majority";
+    let databaseURL = "mongodb+srv://mylany:passwordabc@giscluster.4mjef.mongodb.net/Prüfungsabgabe?retryWrites=true&w=majority";
     databaseConnected(databaseURL); //login information
     function startServer(_port) {
         let server = Http.createServer();
