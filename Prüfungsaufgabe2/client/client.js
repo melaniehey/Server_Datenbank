@@ -36,7 +36,6 @@ var Prüfungsabgabe;
         let interval;
         //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
         function time() {
-            //window.location.href = "../myScore.html";  
             let second = 0;
             let el = document.getElementById("time"); //holt sich das HTML Element mit der ID time
             function incrementSeconds() {
@@ -50,7 +49,6 @@ var Prüfungsabgabe;
         }
         document.addEventListener("DOMContentLoaded", function (_event) {
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
-            console.log("Penis");
             let cardStorage = document.getElementById("cardStorage");
             let allCards = new Array(); //leeres Array wo alle karten sein werden
             for (let i = 0; i < 8; i++) { //8kartenpaare 
@@ -143,17 +141,18 @@ var Prüfungsabgabe;
     //score.html
     else if ((document.querySelector("title").getAttribute("id") == "scorePage")) {
         //kein Button, nur Ausgabe der Highscores
+        async function getInfo() {
+        }
     }
     //myScore.html
     else if ((document.querySelector("title").getAttribute("id") == "myScorePage")) {
         document.getElementById("saveInfoButton").addEventListener("click", sendInfo); //Send Info = Send Name & Time
         async function sendInfo() {
             let formData = new FormData(document.forms[0]); //Hiervon bekomme ich den NAMEN! Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
-            let url = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
-            url += "?mySeconds=" + localStorage.getItem("mySeconds"); //Hiervon bekomme ich die ZEIT!
             //tslint:disable-next-line: no-any
             let query = new URLSearchParams(formData);
-            url = url + "?" + query.toString(); //FormData wird zum String umgewandelt
+            let url = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
+            url += "?PlayerScore=" + localStorage.getItem("mySeconds") + "&" + query.toString(); //Hiervon bekomme ich die ZEIT!
             let answer = await fetch(url); //mit fetch schick ich es an den server mit der URL
             let output = await answer.text();
             console.log(output); //an server geschickt
@@ -161,7 +160,7 @@ var Prüfungsabgabe;
     }
     //admin.html
     else if ((document.querySelector("title").getAttribute("id") == "adminPage")) {
-        document.getElementById("addButton").addEventListener("click", add);
+        document.getElementById("showPictures").addEventListener("click", add);
         async function add() {
         }
     }

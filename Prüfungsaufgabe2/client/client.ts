@@ -45,8 +45,8 @@ namespace Prüfungsabgabe {
 
         //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
         function time(): void {
-            //window.location.href = "../myScore.html";  
-            
+
+
             let second: number = 0;
             let el: HTMLSpanElement = document.getElementById("time"); //holt sich das HTML Element mit der ID time
 
@@ -61,13 +61,13 @@ namespace Prüfungsabgabe {
 
             //LocalStorage
             localStorage.setItem("mySeconds", el.innerText);
+
             console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
 
         }
 
         document.addEventListener("DOMContentLoaded", function (_event: Event): void {  //1. warten bis domElement (Div) geladen aht um alles zu verwennden 
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
-            console.log("Penis");
             let cardStorage: HTMLDivElement = <HTMLDivElement>document.getElementById("cardStorage");
             let allCards: HTMLDivElement[] = new Array(); //leeres Array wo alle karten sein werden
             for (let i: number = 0; i < 8; i++) { //8kartenpaare 
@@ -117,7 +117,7 @@ namespace Prüfungsabgabe {
                         firstCard = this.classList.item(1); //Die zweite Klasse "card_number" wird in firstCard gespeichert, deshslb item(1). Somit ist firstCard nicht mehr undefined. Die erste Klasse ist "cards"
                         this.classList.add("firstCard");
                     } else if (firstCard && !secondCard && !this.classList.contains("firstCard")) { //damit man nciht 2x auf dei selbe karte klicken kann
-                        let firstCards = document.getElementsByClassName("firstCard");
+                        let firstCards: HTMLCollectionOf<HTMLDivElement> = <HTMLCollectionOf<HTMLDivElement>>document.getElementsByClassName("firstCard");
 
                         for (let x: number = 0; x < firstCards.length; x++) {
                             firstCards[x].classList.remove("firstCard");
@@ -188,6 +188,10 @@ namespace Prüfungsabgabe {
     else if ((document.querySelector("title").getAttribute("id") == "scorePage")) {
         //kein Button, nur Ausgabe der Highscores
 
+        async function getInfo(): Promise<void> {
+
+        }
+
     }
 
     //myScore.html
@@ -196,11 +200,10 @@ namespace Prüfungsabgabe {
 
         async function sendInfo(): Promise<void> { //function an den server
             let formData: FormData = new FormData(document.forms[0]); //Hiervon bekomme ich den NAMEN! Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
-            let url: string = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
-            url += "?mySeconds=" + localStorage.getItem("mySeconds"); //Hiervon bekomme ich die ZEIT!
             //tslint:disable-next-line: no-any
             let query: URLSearchParams = new URLSearchParams(<any>formData);
-            url = url + "?" + query.toString();  //FormData wird zum String umgewandelt
+            let url: string = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
+            url += "?PlayerScore=" + localStorage.getItem("mySeconds") + "&" + query.toString(); //Hiervon bekomme ich die ZEIT!
             let answer: Response = await fetch(url); //mit fetch schick ich es an den server mit der URL
             let output: string = await answer.text();
             console.log(output);  //an server geschickt
@@ -209,7 +212,7 @@ namespace Prüfungsabgabe {
 
     //admin.html
     else if ((document.querySelector("title").getAttribute("id") == "adminPage")) {
-        document.getElementById("addButton").addEventListener("click", add);
+        document.getElementById("showPictures").addEventListener("click", add);
 
         async function add(): Promise<void> {
 
