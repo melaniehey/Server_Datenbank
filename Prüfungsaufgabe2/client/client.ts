@@ -7,7 +7,6 @@ namespace Prüfungsabgabe {
     //play.html
     if ((document.querySelector("title").getAttribute("id") == "playPage")) {
 
-
         function shuffle(_array: HTMLDivElement[]): HTMLDivElement[] {  //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
             let currentIndex: number = _array.length; //2. das array it 16 karten, er nimmt die länge davon und erstelllt leere variable - randomIndex
             let randomIndex: number;
@@ -46,6 +45,8 @@ namespace Prüfungsabgabe {
 
         //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
         function time(): void {
+            //window.location.href = "../myScore.html";  
+            
             let second: number = 0;
             let el: HTMLSpanElement = document.getElementById("time"); //holt sich das HTML Element mit der ID time
 
@@ -66,7 +67,7 @@ namespace Prüfungsabgabe {
 
         document.addEventListener("DOMContentLoaded", function (_event: Event): void {  //1. warten bis domElement (Div) geladen aht um alles zu verwennden 
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
-
+            console.log("Penis");
             let cardStorage: HTMLDivElement = <HTMLDivElement>document.getElementById("cardStorage");
             let allCards: HTMLDivElement[] = new Array(); //leeres Array wo alle karten sein werden
             for (let i: number = 0; i < 8; i++) { //8kartenpaare 
@@ -142,13 +143,12 @@ namespace Prüfungsabgabe {
                         if (pairAmount > 1) {
                             pairAmount--;
                         } else {
-                            window.location.href = "http://127.0.0.1:5500/Server_Datenbank/Pr%C3%BCfungsaufgabe2/MyScore.html"; //?
                             // console.log("Fertig, timer ende, spiel vorbei");
                             clearInterval(interval);
                             let timeElement: HTMLSpanElement = document.getElementById("time");
                             console.log(timeElement.innerText);
                             //---------
-                            window.location.href = "MyScore.html"; //weiterleitung auf score.html 
+                            window.location.href = "../myScore.html"; //weiterleitung auf score.html 
                             //https://www.w3schools.com/js/js_window_location.asp
                             //oder https-Adresse??????
                             //ScorePage ÄNDERN - auf Seite 5 (zwischendrin)
@@ -186,32 +186,32 @@ namespace Prüfungsabgabe {
 
     //score.html
     else if ((document.querySelector("title").getAttribute("id") == "scorePage")) {
+        //kein Button, nur Ausgabe der Highscores
 
     }
 
     //myScore.html
     else if ((document.querySelector("title").getAttribute("id") == "myScorePage")) {
-        document.getElementById("send").addEventListener("click", sendInfo);
+        document.getElementById("saveInfoButton").addEventListener("click", sendInfo);  //Send Info = Send Name & Time
 
         async function sendInfo(): Promise<void> { //function an den server
-            let formData: FormData = new FormData(document.forms[0]);                               //Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
-            let url: string = "https://gissose21.herokuapp.com/sendInfo";
-            url += "?mySeconds=" + localStorage.getItem("mySeconds");  //Es gibt nur 1 Folmular, also [0]
+            let formData: FormData = new FormData(document.forms[0]); //Hiervon bekomme ich den NAMEN! Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
+            let url: string = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
+            url += "?mySeconds=" + localStorage.getItem("mySeconds"); //Hiervon bekomme ich die ZEIT!
             //tslint:disable-next-line: no-any
             let query: URLSearchParams = new URLSearchParams(<any>formData);
-            url = url + "?" + query.toString();
-            let answer: Response = await fetch(url);
-            let ausgabe: String = await answer.text();
-            console.log(ausgabe);  //an server geschickt
+            url = url + "?" + query.toString();  //FormData wird zum String umgewandelt
+            let answer: Response = await fetch(url); //mit fetch schick ich es an den server mit der URL
+            let output: string = await answer.text();
+            console.log(output);  //an server geschickt
         }
     }
 
     //admin.html
     else if ((document.querySelector("title").getAttribute("id") == "adminPage")) {
+        document.getElementById("addButton").addEventListener("click", add);
 
-        document.getElementById("buttonAdmin").addEventListener("click", hinzufügen);
-
-        async function hinzufügen(): Promise<void> {
+        async function add(): Promise<void> {
 
         }
     }

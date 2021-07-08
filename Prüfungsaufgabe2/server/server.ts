@@ -30,38 +30,39 @@ export namespace Prüfungsabgabe {
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Zugriffserlaubnis, durch * dürfen alle darauf zugreifen
 
         if (_request.url) {
-            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //umwandeln in String/assoziatives Array
-            // let card: MemoryPicture = { namePicture: url.query.namePicture + "", urlPicture: url.query.urlPicture + "" }; //mit "" wird es als ein String gesehen
-            // let remove: string | string[] = url.query.namePicture + "";
-            // let score: Scoredata = { playerName: url.query.playerName + "", playerTime: parseInt(url.query.playerTime + "") };
+            let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); //umwandeln in assoziatives Array
 
-            let x: string = JSON.stringify(url.query); //in string umwandeln
-            console.log(x);
+            let jsonString: string = JSON.stringify(url.query); //in string umwandeln damit man es ausgeben kann //test                            //braucht man nicht, muss aber dann die if darunter ändern
+            console.log(jsonString);
+            //wenn diese zwei zeilen weg n´sind muss man hier unten nicht mehr parsen sondern kann es direkt wegschicken
 
-            if (url.pathname == "sendInfo") {
-                let playerName: Scoredata = JSON.parse(x); //in json-objekt
-                let antwort: string = await einspeichern(databaseURL, playerName);
-                _response.write(antwort);
+            if (url.pathname == "sendInfo") { //url mit sendInfo wird abgefangen
+                let playerName: Scoredata = JSON.parse(jsonString); //jsonString(habe ich oben mit stringify gewandelt) wieder in json-objekt umwandeln
+                let answer2: string = await saveEntry(databaseURL, playerName);
+                _response.write(answer2);
             }
         }
         _response.write("My response");
         _response.end();
 
     }
-
-    async function einspeichern(_url: string, _playerName: Scoredata): Promise<string> {
+    //das was bei (Zeile 40)"let answer2 ... save(databaseURL, playerName)" am ende als Parameter angegeben, kommt hier als Param in die Funktion.
+    async function saveEntry(_url: string, _playerName: Scoredata): Promise<string> {
         let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; //URL Parser wird benutzt, True das es benutzt werden soll
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-        let meineDatenbank: Mongo.Collection = mongoClient.db("Prüfungsabgabe").collection("Time");
-        meineDatenbank.insertOne(_playerName);
-        return("Wurde angelegt");
+        await mongoClient.connect(); //connected zu datenbank
+        let myDatabase: Mongo.Collection = mongoClient.db("Prüfungsabgabe").collection("Time");
+        myDatabase.insertOne(_playerName); //playerName wird mit Timer in der db eingespeichert, ***, insert, und wenn man löscht dann remove
+        return("entry is registered");
+        //*** und gibt es den string zurück, und den string schreibt man dann als antwort beim client. Beim client wird der string dann ausgewertet
     }
 
 
+
+
     interface MemoryPicture {
-        namePicture: string;
-        urlPicture: string;
+        pictureName: string;
+        pictureUrl: string;
     }
 
     interface Scoredata {
