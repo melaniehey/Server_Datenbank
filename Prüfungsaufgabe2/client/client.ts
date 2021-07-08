@@ -46,23 +46,25 @@ namespace Prüfungsabgabe {
         //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
         function time(): void {
 
+            if ( document.getElementById("activePlay") != undefined ) { //wird nur ausgeführt wenn es activplay id gibt (Nur im play.htmk)
+                let second: number = 0;
+                let el: HTMLSpanElement = document.getElementById("time"); //holt sich das HTML Element mit der ID time
 
-            let second: number = 0;
-            let el: HTMLSpanElement = document.getElementById("time"); //holt sich das HTML Element mit der ID time
+
+                function incrementSeconds(): void {
+                    second += 1;
+                    el.innerText = second + "s"; //das muss in den localStorage
+                }
+
+                interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
 
 
-            function incrementSeconds(): void {
-                second += 1;
-                el.innerText = second + "s"; //das muss in den localStorage
+                //LocalStorage
+                localStorage.setItem("mySeconds", el.innerText);
+
+                console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
+
             }
-
-            interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
-
-
-            //LocalStorage
-            localStorage.setItem("mySeconds", el.innerText);
-
-            console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
 
         }
 

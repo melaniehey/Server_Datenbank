@@ -36,16 +36,18 @@ var Prüfungsabgabe;
         let interval;
         //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
         function time() {
-            let second = 0;
-            let el = document.getElementById("time"); //holt sich das HTML Element mit der ID time
-            function incrementSeconds() {
-                second += 1;
-                el.innerText = second + "s"; //das muss in den localStorage
+            if (document.getElementById("activePlay") != undefined) { //wird nur ausgeführt wenn es activplay id gibt (Nur im play.htmk)
+                let second = 0;
+                let el = document.getElementById("time"); //holt sich das HTML Element mit der ID time
+                function incrementSeconds() {
+                    second += 1;
+                    el.innerText = second + "s"; //das muss in den localStorage
+                }
+                interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
+                //LocalStorage
+                localStorage.setItem("mySeconds", el.innerText);
+                console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
             }
-            interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
-            //LocalStorage
-            localStorage.setItem("mySeconds", el.innerText);
-            console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
         }
         document.addEventListener("DOMContentLoaded", function (_event) {
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
