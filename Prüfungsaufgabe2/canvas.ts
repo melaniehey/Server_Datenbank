@@ -3,8 +3,8 @@ namespace Prüfungsaufgabe {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("myFirstCanvas");
         let context: CanvasRenderingContext2D = canvas.getContext("2d");
 
-        canvas.height = 500;
-        // canvas.height = 800;
+        // canvas.height = 500;
+        canvas.height = 800;
         // // canvas.height = window.innerHeight;
         canvas.width = window.innerWidth;
 

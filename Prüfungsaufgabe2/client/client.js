@@ -4,52 +4,53 @@
 //         </div>
 var Prüfungsabgabe;
 (function (Prüfungsabgabe) {
-    //play.html
-    if ((document.querySelector("title").getAttribute("id") == "playPage")) {
-        function shuffle(_array) {
-            let currentIndex = _array.length; //2. das array it 16 karten, er nimmt die länge davon und erstelllt leere variable - randomIndex
-            let randomIndex;
-            // While there remain elements to shuffle...
-            while (0 !== currentIndex) { //solange current index ungleich null ist wird folgendes passieren
-                // Pick a remaining element...
-                randomIndex = Math.floor(Math.random() * currentIndex); //erstellt randomindex zahl zwischen 1 und 16 und fängt mit 16 an. 
-                currentIndex--; //reduziert es um 1, sonst wär while scheife unendlich
-                // And swap it with the current element. array wird durchgegangen von 0, 1, 2.. und diese werden mit random zahlen ersetzt.
-                [_array[currentIndex], _array[randomIndex]] = [
-                    _array[randomIndex], _array[currentIndex]
-                ];
-            }
-            return _array;
+    function shuffle(_array) {
+        let currentIndex = _array.length; //2. das array it 16 karten, er nimmt die länge davon und erstelllt leere variable - randomIndex
+        let randomIndex;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) { //solange current index ungleich null ist wird folgendes passieren
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex); //erstellt randomindex zahl zwischen 1 und 16 und fängt mit 16 an. 
+            currentIndex--; //reduziert es um 1, sonst wär while scheife unendlich
+            // And swap it with the current element. array wird durchgegangen von 0, 1, 2.. und diese werden mit random zahlen ersetzt.
+            [_array[currentIndex], _array[randomIndex]] = [
+                _array[randomIndex], _array[currentIndex]
+            ];
         }
-        function toggleCards(_status) {
-            let allCards = document.getElementsByClassName("cards");
-            for (let cardIndex = 0; cardIndex < allCards.length; cardIndex++) {
-                //status false = disabled, else enabled
-                if (!_status) {
-                    allCards[cardIndex].style.pointerEvents = "none"; //pointerEvents steuert klickbarkeit der Karten. In dem Fall NICHT klickbar
-                }
-                else {
-                    allCards[cardIndex].style.pointerEvents = "auto";
-                }
+        return _array;
+    }
+    function toggleCards(_status) {
+        let allCards = document.getElementsByClassName("cards");
+        for (let cardIndex = 0; cardIndex < allCards.length; cardIndex++) {
+            //status false = disabled, else enabled
+            if (!_status) {
+                allCards[cardIndex].style.pointerEvents = "none"; //pointerEvents steuert klickbarkeit der Karten. In dem Fall NICHT klickbar
+            }
+            else {
+                allCards[cardIndex].style.pointerEvents = "auto";
             }
         }
-        let interval;
-        //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
-        function time() {
-            if (document.getElementById("activePlay") != undefined) { //wird nur ausgeführt wenn es activplay id gibt (Nur im play.htmk)
-                let second = 0;
-                let el = document.getElementById("time"); //holt sich das HTML Element mit der ID time
-                function incrementSeconds() {
-                    second += 1;
-                    el.innerText = second + "s"; //das muss in den localStorage
-                }
-                interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
-                //LocalStorage
-                localStorage.setItem("mySeconds", el.innerText);
-                console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
+    }
+    let interval;
+    //https://www.codegrepper.com/code-examples/javascript/javascript+count+seconds
+    function time() {
+        if (document.getElementById("activePlay") != undefined) { //wird nur ausgeführt wenn es activplay id gibt/definiert ist (Nur im play.htmk)
+            let second = 0;
+            let el = document.getElementById("time"); //holt sich das HTML Element mit der ID time
+            function incrementSeconds() {
+                second += 1;
+                el.innerText = second + "s"; //das muss in den localStorage
             }
+            interval = setInterval(incrementSeconds, 1000); //interval löst Funktion mehrmals aus mit Zeitangabe in Milisekunden, 1000 millisekunden = 1 sekunde
+            //LocalStorage
+            localStorage.setItem("mySeconds", el.innerText);
+            console.log(localStorage.getItem("mySeconds")); //wird in Console ausgegeben
         }
-        document.addEventListener("DOMContentLoaded", function (_event) {
+    }
+    document.addEventListener("DOMContentLoaded", function (_event) {
+        //play.html
+        if ((document.querySelector("body").getAttribute("id") == "playPage")) { //die ID von dem Body kann hier erst geladen werden da zu einem früheren Zeitpunkt der Inhalt der Seite noch nicht geladen wurde
+            //siehe DOMContentLoaded
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
             let cardStorage = document.getElementById("cardStorage");
             let allCards = new Array(); //leeres Array wo alle karten sein werden
@@ -116,7 +117,7 @@ var Prüfungsabgabe;
                             let timeElement = document.getElementById("time");
                             console.log(timeElement.innerText);
                             //---------
-                            window.location.href = "../myScore.html"; //weiterleitung auf score.html 
+                            window.location.href = "myScore.html"; //weiterleitung auf score.html 
                             //https://www.w3schools.com/js/js_window_location.asp
                             //oder https-Adresse??????
                             //ScorePage ÄNDERN - auf Seite 5 (zwischendrin)
@@ -138,33 +139,59 @@ var Prüfungsabgabe;
                     clickCount++; //Ende der Funktion, daher wird Clickcount erhöht
                 }
             }
-        });
-    }
-    //score.html
-    else if ((document.querySelector("title").getAttribute("id") == "scorePage")) {
-        //kein Button, nur Ausgabe der Highscores
-        async function getInfo() {
         }
-    }
-    //myScore.html
-    else if ((document.querySelector("title").getAttribute("id") == "myScorePage")) {
-        document.getElementById("saveInfoButton").addEventListener("click", sendInfo); //Send Info = Send Name & Time
-        async function sendInfo() {
-            let formData = new FormData(document.forms[0]); //Hiervon bekomme ich den NAMEN! Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
-            //tslint:disable-next-line: no-any
-            let query = new URLSearchParams(formData);
-            let url = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
-            url += "?PlayerScore=" + localStorage.getItem("mySeconds") + "&" + query.toString(); //Hiervon bekomme ich die ZEIT!
-            let answer = await fetch(url); //mit fetch schick ich es an den server mit der URL
-            let output = await answer.text();
-            console.log(output); //an server geschickt
+        //score.html
+        else if (document.querySelector("title").getAttribute("id") == "scorePage") {
+            //kein Button, nur Ausgabe der Highscores
+            // async function showInfo(): Promise<void> {
+            // displayANTWORt.innerHTML = "Du hast " + localStorage.getItem("mySeconds") + "gebraucht.";  //mit id im html verbinden
+            // }
         }
-    }
-    //admin.html
-    else if ((document.querySelector("title").getAttribute("id") == "adminPage")) {
-        document.getElementById("showPictures").addEventListener("click", add);
-        async function add() {
+        //myScore.html
+        else if (document.querySelector("title").getAttribute("id") == "myScorePage") {
+            document.getElementById("saveInfoButton").addEventListener("click", sendInfo); //Send Info = Send Name & Time
+            async function sendInfo() {
+                let formData = new FormData(document.forms[0]); //Hiervon bekomme ich den NAMEN! Formular. Wie ein Array mit Key und Value. //Dieses Array wird wieder in Array gespeichert, nähmlich document.forms. 
+                //tslint:disable-next-line: no-any
+                let query = new URLSearchParams(formData);
+                let url = "https://gissose21.herokuapp.com/sendInfo"; //Es gibt nur 1 Folmular, also [0]
+                url += "?PlayerScore=" + localStorage.getItem("mySeconds") + "&playername" + query.toString(); //Hiervon bekomme ich die ZEIT! + name (name == query.toString()) //das wird alles im link ausgegeben
+                let answer = await fetch(url); //mit fetch schick ich es an den server mit der URL
+                let output = await answer.text();
+                console.log(output); //an server geschickt
+            }
         }
-    }
+        //admin.html
+        else if (document.querySelector("title").getAttribute("id") == "adminPage") {
+            document.getElementById("sendToDatabaseButton").addEventListener("click", sendPicture); //Bilder speichern
+            let displayOutput = document.getElementById("displayOutput");
+            async function sendPicture() {
+                let formData = new FormData(document.forms[0]);
+                //tslint:disable-next-line: no-any
+                let query = new URLSearchParams(formData);
+                let url = "https://gissose21.herokuapp.com/sendPicture";
+                url = url + "?" + query.toString();
+                let answer = await fetch(url);
+                displayOutput.innerHTML = ""; //Text wird zurückgesetzt, so dass neuer Text ausgegeben kanns
+                console.log(answer);
+                if (answer == undefined) { //es fragt, gibt es eine RESPONSE oder nicht -> server.ts --> _response.end();
+                    displayOutput.innerHTML = "image could not be saved";
+                }
+                else {
+                    displayOutput.innerHTML = "image has been saved";
+                }
+            }
+            document.getElementById("showPictureButton").addEventListener("click", showPicture); //Bilder ansehen
+            async function showPicture() {
+                let formData = new FormData(document.forms[0]);
+                //tslint:disable-next-line: no-any
+                let query = new URLSearchParams(formData);
+                let url = "https://gissose21.herokuapp.com/showPicture";
+                url = url + "?" + query.toString();
+                let answer = await fetch(url);
+                //? weiter
+            }
+        }
+    });
 })(Prüfungsabgabe || (Prüfungsabgabe = {}));
 //# sourceMappingURL=client.js.map

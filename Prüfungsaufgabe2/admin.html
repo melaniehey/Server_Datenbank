@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="client.js"></script>
+    <script src="client/client.js"></script>
     <title id="adminPage">Memory</title>
 </head>
 
@@ -22,18 +22,20 @@
     </nav>
     <h1>Form</h1>
     <form>
-        <label for="picturename">Picture-Name</label>
+        <label for="picturename">Imagename</label>
         <input type="text" name="name">
-        <label for="pictureurl">Picture-URL</label>
+
+        <label for="pictureurl">Imagelink</label>
         <input type="text" name="url">
         
-        <button type="button" id="sendToDatabase"> Send picture to database </button>
-        <button type="button" id="showPictures"> Show my pictures</button>
+        <button type="button" id="sendToDatabaseButton"> Send image to database </button>
+        <button type="button" id="showPictureButton"> Show my image</button>
+
+        <button type="button" id="deletePictureButton"> Delete image</button> <!--mehrere davon, pro image ein button-->
     </form>
     <h1>Data</h1>
-    <div id="answer"></div>
+    <div id="displayOutput"></div> <!-- nur für serverantwort oder auch alle bilder? -->
 
-    <!-- <button type="button" id="addButton">add Picture</button> -->
 </body>
 
 </html>

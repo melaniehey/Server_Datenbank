@@ -20,7 +20,7 @@
 }
 
 body {
-    background: radial-gradient(#9e45f1, #bb1eeb);
+    background: radial-gradient(#9e45f1, #530c69);
     max-width : 1000px;
     margin    : auto
 }
@@ -30,11 +30,17 @@ html {
     /*damit der hintergrund farbverlauf funktioniert*/
 }
 
-@font-face {
-    /* https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face */
-    font-family: "MemoryGame";
-    src        : url("Exo_2/Exo2-Italic-VariableFont_wght.ttf") format("ttf");
+/*@font-face {
+
+    font-family: "Catamaran";
+    src        : url("/Catamaran/static/Catamaran-Bold.ttf") format("ttf");
+    font-weight: 700;
 }
+@font-face {
+    font-family: "Catamaran";
+    src        : url("/Catamaran/static/Catamaran-Thin.ttf") format("ttf");
+    font-weight: 300;
+}*/
 
 /* START-SEITE */
 #title {
@@ -43,7 +49,7 @@ html {
 
 .title1,
 .title2 {
-    font-family: MemoryGame, sans-serif;
+    font-family: sans-serif;
     text-align : center;
     font-size  : 90px;
     padding    : 10px;
@@ -70,6 +76,7 @@ html {
 #navibereich {
     /* display    :  */
     /* /* margin  : 0 20px 20px 20px;  */
+    position: absolute;
 }
 
 #play,
@@ -77,7 +84,7 @@ html {
 #admin {
     /* https://stackoverflow.com/questions/4797748/can-i-put-an-html-button-inside-the-canvas */
     /* z-index: 2;  */
-    font-family    : MemoryGame, sans-serif;
+    font-family    : sans-serif;
     text-align     : center;
     font-size      : 16px;
     padding        : 10px;
@@ -134,7 +141,7 @@ https://stackoverflow.com/questions/2719668/an-html5-canvas-element-in-the-backg
 
 /* PLAY-SEITE */
 .headline {
-    font-family: MemoryGame, sans-serif;
+    font-family: sans-serif;
     text-align : center;
     font-size  : 20px;
     padding    : 5px;
@@ -146,7 +153,7 @@ https://stackoverflow.com/questions/2719668/an-html5-canvas-element-in-the-backg
 }
 
 .gameinfo {
-    font-family: MemoryGame, sans-serif;
+    font-family: sans-serif;
     color      : white;
     font-size  : 20px;
 }
@@ -172,9 +179,9 @@ body .turnAround {
 
 }
 
-#cardStorage div{
+#cardStorage div {
     height: 150px;
-    width: 150px;
+    width : 150px;
 }
 
 .gameinfos {
@@ -197,17 +204,17 @@ body .turnAround {
 
 .pair_0 {
     background-image: url("Images/raccoon.jpg");
-    transform: rotateY( 180deg )
+    transform       : rotateY(180deg)
 }
 
 .pair_1 {
     background-image: url("Images/chicken.jpg");
-    transform: rotateY( 180deg )
+    transform       : rotateY(180deg)
 }
 
 .pair_2 {
     background-image: url("Images/dogBubble.jpg");
-    transform: rotateY( 180deg )
+    transform       : rotateY(180deg)
 }
 
 .pair_3 {
