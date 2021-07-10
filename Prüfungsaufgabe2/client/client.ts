@@ -69,35 +69,62 @@ namespace Prüfungsabgabe {
 
     }
 
+    async function getPictures(): Promise<any> {
+        let formData: FormData = new FormData(document.forms[0]);
+        //tslint:disable-next-line: no-any
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
+        let url: string = "https://gissose21.herokuapp.com/showPicture";
+        url = url + "?" + query.toString();
+        let answer: Response = await fetch(url);
+        let images: any = await answer.json();
+
+        console.log(images);
+
+        return images;
+    }
+
+    let pairAmount: number = 0;
+
+    async function displayCards(): Promise<void> {
+        let cardStorage: HTMLDivElement = <HTMLDivElement>document.getElementById("cardStorage");
+        let allCards: HTMLDivElement[] = new Array(); //leeres Array wo alle karten sein werden
+
+        let dbImages: any = getPictures();
+
+        for (let i: number = 0; i < 8; i++) { //8kartenpaare 
+
+            for (let index: number = 0; index < 2; index++) { //jede kartenpaar brauccht eine zweite karte
+                let card: HTMLDivElement = document.createElement("div"); //ein div eine karte
+
+                console.log(dbImages);
+
+                card.style.backgroundImage = "url('" + dbImages[i]["url"] + "')";
+                card.classList.add("cards"); //div mit der kalsse cards
+                card.classList.add("turnAround");
+                card.classList.add("pair_" + i); //jede karte wir kenntlcih gemacht welche zsm gehören.
+
+                allCards.push(card); //erstellte element Card (8stück) werden in allCards gespeichert.
+            }
+        }
+
+        pairAmount = allCards.length / 2;
+
+        allCards = shuffle(allCards);
+        for (let i2: number = 0; i2 < allCards.length; i2++) { //allCardslength = 16
+            cardStorage.appendChild(allCards[i2]); //alle 16 karten werden dem cardstorage hinzugefügt
+        }
+    }
 
 
 
     document.addEventListener("DOMContentLoaded", function (_event: Event): void {  //1. warten bis domElement (Div) geladen aht um alles zu verwennden 
 
-         //play.html
+        //play.html
         if ((document.querySelector("body").getAttribute("id") == "playPage")) {//die ID von dem Body kann hier erst geladen werden da zu einem früheren Zeitpunkt der Inhalt der Seite noch nicht geladen wurde
-                                                                                //siehe DOMContentLoaded
+            //siehe DOMContentLoaded
 
             time(); //time wird am Anfang aufgerufen da zu Spielbeginn die Zeit laufen soll 
-            let cardStorage: HTMLDivElement = <HTMLDivElement>document.getElementById("cardStorage");
-            let allCards: HTMLDivElement[] = new Array(); //leeres Array wo alle karten sein werden
-            for (let i: number = 0; i < 8; i++) { //8kartenpaare 
-
-                for (let index: number = 0; index < 2; index++) { //jede kartenpaar brauccht eine zweite karte
-                    let card: HTMLDivElement = document.createElement("div"); //ein div eine karte
-                    card.classList.add("cards"); //div mit der kalsse cards
-                    card.classList.add("turnAround");
-                    card.classList.add("pair_" + i); //jede karte wir kenntlcih gemacht welche zsm gehören.
-                    allCards.push(card); //erstellte element Card (8stück) werden in allCards gespeichert.
-                }
-            }
-
-            let pairAmount: number = allCards.length / 2;
-
-            allCards = shuffle(allCards);
-            for (let i2: number = 0; i2 < allCards.length; i2++) { //allCardslength = 16
-                cardStorage.appendChild(allCards[i2]); //alle 16 karten werden dem cardstorage hinzugefügt
-            }
+            displayCards();
 
             //Neuer Abschnitt: Karten anklicken
             let selectedCard: HTMLCollectionOf<Element> = document.getElementsByClassName("cards");
@@ -234,8 +261,7 @@ namespace Prüfungsabgabe {
                 let url: string = "https://gissose21.herokuapp.com/sendPicture";
                 url = url + "?" + query.toString();
                 let answer: Response = await fetch(url);
-                displayOutput.innerHTML = ""; //Text wird zurückgesetzt, so dass neuer Text ausgegeben kanns
-                console.log(answer);
+                displayOutput.innerHTML = ""; //Text wird zurückgesetzt, so dass neuer Text ausgegeben kanns //LUKAS: https://plagiatus.github.io/GIS_SoSe2020/Aufgabe11/Client/
                 if (answer == undefined) { //es fragt, gibt es eine RESPONSE oder nicht -> server.ts --> _response.end();
                     displayOutput.innerHTML = "image could not be saved";
                 } else {
@@ -245,13 +271,19 @@ namespace Prüfungsabgabe {
             document.getElementById("showPictureButton").addEventListener("click", showPicture); //Bilder ansehen
 
             async function showPicture(): Promise<void> {
-                let formData: FormData = new FormData(document.forms[0]);
-                //tslint:disable-next-line: no-any
-                let query: URLSearchParams = new URLSearchParams(<any>formData);
-                let url: string = "https://gissose21.herokuapp.com/showPicture";
-                url = url + "?" + query.toString();
-                let answer: Response = await fetch(url);
-                //? weiter
+
+                let images: any = getPictures();
+
+                for (let image of await images) { //Wird durch das Arry images geloopt und jedes Element von images wird als image verwendet
+                    let outerContainer: HTMLDivElement = document.createElement("div");
+
+                    outerContainer.classList.add("cards");
+                    outerContainer.style.backgroundImage = "url('" + image["url"] + "')";
+
+                    let output: HTMLDivElement = <HTMLDivElement>document.getElementById("displayOutput");
+
+                    output.appendChild(outerContainer);
+                }
             }
         }
     });

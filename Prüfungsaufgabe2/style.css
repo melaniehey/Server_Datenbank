@@ -158,10 +158,17 @@ https://stackoverflow.com/questions/2719668/an-html5-canvas-element-in-the-backg
     font-size  : 20px;
 }
 
-body .cards {
-    height         : 150px;
-    width          : 150px;
+body .cards{
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
     background-size: cover;
+    background-position: center;
+}
+
+#displayOutput .cards{
+    display: inline-block;
+    margin-right: 10px;
 }
 
 body .turnAround {
@@ -202,7 +209,7 @@ body .turnAround {
     }
 }
 
-.pair_0 {
+/*.pair_0 {
     background-image: url("Images/raccoon.jpg");
     transform       : rotateY(180deg)
 }
@@ -241,7 +248,7 @@ body .turnAround {
     text-decoration: none;
     color          : white;
     margin         : 0 130px 0 0;
-}
+}*/
 
 /* Flip on click */
 .cards {
