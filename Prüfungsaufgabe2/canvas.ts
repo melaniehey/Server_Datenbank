@@ -5,9 +5,8 @@ namespace Prüfungsaufgabe {
 
         if (canvas) {
             let context: CanvasRenderingContext2D = canvas.getContext("2d");
-            // canvas.height = 500;
+           
             canvas.height = 800;
-            // // canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;
 
 

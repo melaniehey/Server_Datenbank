@@ -5,9 +5,7 @@ var Prüfungsaufgabe;
         let canvas = document.getElementById("myFirstCanvas");
         if (canvas) {
             let context = canvas.getContext("2d");
-            // canvas.height = 500;
             canvas.height = 800;
-            // // canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;
             //Oben
             context.beginPath();
