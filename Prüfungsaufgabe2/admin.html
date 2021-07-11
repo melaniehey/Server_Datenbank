@@ -10,30 +10,38 @@
     <title id="adminPage">Memory</title>
 </head>
 
-<body>
+<body id="adminPage">
+    <nav id="navibereich">
+        <div id="home3"><a href="index.html"> <img src="Images/house.png" alt="Back home"></a></div>
+    </nav>
     <header class="headline">
         <h1>MY COLLECTION</h1>
-        <!--oder ADMIN-->
     </header>
-    <nav id="navibereich">
-        <a id="home" href="index.html">HOME</a>
-        <!--oder ein Haus-Icon-->
+    
 
-    </nav>
-    <h1>Form</h1>
-    <form>
-        <label for="picturename">Imagename</label>
-        <input type="text" name="name">
+    <!-- <h1>Form</h1> -->
+    <div>
+        <form class="saveOwnPicture">
+            <div class="inputbox">
+                <label for="picturename"></label>
+                <input class="adminImput" type="text" name="name" placeholder="Imagename">
 
-        <label for="pictureurl">Imagelink</label>
-        <input type="text" name="url">
-        
-        <button type="button" id="sendToDatabaseButton"> Send image to database </button>
-        <button type="button" id="showPictureButton"> Show my image</button>
+                <label for="pictureurl"></label>
+                <input class="adminImput" type="text" name="url" placeholder="Imagelink">
+            </div>
+            <div class="adminbuttons">
+                <button type="button" id="sendToDatabaseButton"> Send image to database </button>
+                <button type="button" id="showPictureButton"> Show my images</button>
+            </div>
 
-        <button type="button" id="deletePictureButton"> Delete image</button> <!--mehrere davon, pro image ein button-->
-    </form>
-    <h1>Data</h1>
+            <!-- <button type="button" id="deletePictureButton"> Delete image</button> -->
+            <!--mehrere davon, pro image ein button-->
+            <div id="messages"></div>
+        </form>
+    </div>
+
+    <!-- <h1>Data</h1> -->
+
     <div id="displayOutput"></div> <!-- nur für serverantwort oder auch alle bilder? -->
 
 </body>

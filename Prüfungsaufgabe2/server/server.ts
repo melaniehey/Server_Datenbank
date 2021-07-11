@@ -59,7 +59,7 @@ export namespace Prüfungsabgabe {
             //highscore aufrufen
             if (url.pathname == "/showInfo") { //Die Info soll aus DB in score.html gezeigt werden
                 let cursor: Mongo.Cursor = myDatabaseScores.find();
-                let scoreData: Scoredata[] = await cursor.toArray();
+                let scoreData: Memory[] = await cursor.toArray();
                 _response.write(JSON.stringify(scoreData)); //wozu
             }
 
@@ -72,14 +72,16 @@ export namespace Prüfungsabgabe {
             //Bild aufrufen
             if (url.pathname == "/showPicture") {
                 let cursor: Mongo.Cursor = myDatabasePictures.find(); //cursor soll alle Bilder in der db finden, weil im () ncihts drin steht
-                let pictureData: MemoryPicture[] = await cursor.toArray(); //ohne [] wird pictureData angestrichen
+                let pictureData: Memory[] = await cursor.toArray(); //ohne [] wird pictureData angestrichen
                 _response.write(JSON.stringify(pictureData)); //wozu?
             }
 
             //Bild löschen
             if (url.pathname == "/deletePicture") {
-                let cursor: Mongo.Cursor = myDatabasePictures.find(); //weiß er WELCHES bild?
-
+                //let cursor: Mongo.Cursor = <any>myDatabasePictures.deleteOne("url": url); 
+                //let pictureData: MemoryPicture[] = await cursor.toArray();
+                _response.write(url.query);
+                deletePicture(url.query);
             }
         }
         _response.end();
@@ -95,17 +97,17 @@ export namespace Prüfungsabgabe {
 
     }
 
-    function saveEntry(_playerName: Scoredata): string { //_playerName? Score
+    function saveEntry(_playerName: Memory): string { //_playerName? Score
         myDatabaseScores.insert(_playerName);
         return ("Your entry has been saved.");
     }
 
-    function savePicture(_picture: MemoryPicture): string {
+    function savePicture(_picture: Memory): string {
         myDatabasePictures.insert(_picture);
         return ("Your image has been saved.");
     }
 
-    function deletePicture(_picture: MemoryPicture): string {
+    function deletePicture(_picture: Memory): string {
         myDatabasePictures.deleteOne(_picture);
         return ("Your image has been deleted.");
     }
@@ -127,13 +129,17 @@ export namespace Prüfungsabgabe {
     // }
 
 
-    interface MemoryPicture {
-        [type: string]: string | string[]; //das, damit bei " savePicture(url.query);" das url.query nicht unterstrichen wird.
-        // pictureName: string;
-        // pictureUrl: string;
-    }
+    // interface MemoryPicture {
+    //     [type: string]: string | string[]; 
+    //     // pictureName: string;
+    //     // pictureUrl: string;
+    // }
 
-    interface Scoredata {  //playerName und playereTime ist immer ein objekt
-        [type: string]: string | string[]; 
+    // interface Scoredata {  //playerName und playereTime ist immer ein objekt
+    //     [type: string]: string | string[]; 
+    // }
+
+    interface Memory {  
+        [type: string]: string | string[];  //das, damit bei " savePicture(url.query);" das url.query nicht unterstrichen wird.
     }
 }

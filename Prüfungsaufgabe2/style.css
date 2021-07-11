@@ -16,7 +16,8 @@
 } */
 
 * {
-    box-sizing: border-box;
+    box-sizing : border-box;
+    font-family: sans-serif;
 }
 
 body {
@@ -29,6 +30,21 @@ html {
     min-height: 100vh;
     /*damit der hintergrund farbverlauf funktioniert*/
 }
+
+button {
+    /* font-family: sans-serif; */
+    /* text-align : center; */
+    font-size     : 13px;
+    padding       : 10px;
+    background    : white;
+    border        : none;
+    /* border     : black; */
+    /* color      : #000000; */
+    /* display    : inline-block; */
+    /* margin     : 20px 0px 0px 0px; */
+    width         : 170px;
+}
+
 
 /*@font-face {
 
@@ -43,8 +59,40 @@ html {
 }*/
 
 /* START-SEITE */
+
+@media only screen and (max-width: 1320px){
+    body #smiley{
+        position: relative;
+        display: block;
+        margin: auto;
+        left: 0;
+        top: 0;
+        margin-top: 60px;
+        width: 160px;
+    }
+
+    #bodyIndex #title{
+        margin-top: 40px;
+    }
+}
+
+#smiley {
+    position: absolute;
+    top     : 260px;
+    height  : auto;
+    width   : 250px;
+    left    : 100px;
+}
+
 #title {
     margin-top: 160px;
+}
+
+#bodyIndex #navibereich{
+    top: unset;
+    margin: auto;
+    width: 540px;
+    position: relative;
 }
 
 .title1,
@@ -72,11 +120,41 @@ html {
     width  : 450px;
 }
 
+@media only screen and (max-width: 940px){
+    body #navibereich{
+        max-width: 600px;
+        margin: auto;
+        position: relative;
+        top: 30px;
+    }
+
+    body #navibereich #home3, body #navibereich #home2, body #navibereich #home1, body #navibereich #home4, body #navibereich #home5{
+        margin: unset;
+    }
+}
 
 #navibereich {
     /* display    :  */
     /* /* margin  : 0 20px 20px 20px;  */
     position: absolute;
+    top: 78px
+    /* damit Buttons über dem Canvas sind */
+}
+
+@media only screen and (max-width: 570px){
+
+    #bodyIndex #navibereich{
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    body #play,
+    body #score,
+    body #admin{
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+    }
 }
 
 #play,
@@ -96,9 +174,7 @@ html {
     text-decoration: none;
 }
 
-#play {
-    margin-left: 230px;
-}
+
 
 #score {
     margin-left: 20px;
@@ -114,7 +190,7 @@ https://www.webdesignerdepot.com/2014/05/8-simple-css3-transitions-that-will-wow
 #score:hover,
 #admin:hover {
     transition       : all 0.4s ease;
-    background-color : rgb(251, 255, 0);
+    background-color : rgb(208, 255, 0);
     -webkit-transform: scale(1.1);
     -ms-transform    : scale(1.1);
     transform        : scale(1.1);
@@ -140,6 +216,23 @@ https://stackoverflow.com/questions/2719668/an-html5-canvas-element-in-the-backg
 
 
 /* PLAY-SEITE */
+
+@media only screen and (max-width: 700px){
+    body .game, body #cardStorage{
+        grid-template-columns: repeat(3, auto);
+    }
+}
+
+@media only screen and (max-width: 520px){
+    body .game, body #cardStorage{
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+#home1 {
+    margin: 0 0 0 720px;
+}
+
 .headline {
     font-family: sans-serif;
     text-align : center;
@@ -148,32 +241,33 @@ https://stackoverflow.com/questions/2719668/an-html5-canvas-element-in-the-backg
     background : white;
     color      : #000000;
     width      : 400px;
-    display    : inline-block;
-    margin     : 50px 0 0 290px;
+    margin: auto;
+    margin-top: 50px;
 }
 
-.gameinfo {
+/* .gameinfo {
     font-family: sans-serif;
     color      : white;
     font-size  : 20px;
-}
+} */
 
-body .cards{
-    height: 150px;
-    width: 150px;
-    overflow: hidden;
-    background-size: cover;
+body .cards {
+    height             : 150px;
+    width              : 150px;
+    overflow           : hidden;
+    background-size    : cover;
     background-position: center;
 }
 
-#displayOutput .cards{
-    display: inline-block;
+#displayOutput .cards {
+    display     : inline-block;
     margin-right: 10px;
 }
 
 body .turnAround {
     /*alle turnAround in body werden angesprochen*/
-    background: rgb(224, 245, 39);
+    background: rgb(208, 255, 0) !important;
+    /*!important wird verwended um den inline style zu überschreiben*/
 }
 
 .game,
@@ -194,7 +288,7 @@ body .turnAround {
 .gameinfos {
     grid-column    : 1 / -1;
     display        : flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 @media (max-width: 600px) {
@@ -271,3 +365,212 @@ body .turnAround {
 /* .card.is-flipped {
     transform: rotateY( 180deg )
 } */
+
+/* score.html */
+#home2 {
+    margin: 1px 0 0 720px;
+}
+
+/* https://www.w3schools.com/css/css_table.asp */
+#highscores {
+    border-collapse: collapse;
+    width          : 70%;
+    margin         : auto;
+    margin-top     : 50px;
+}
+
+#highscores td,
+#highscores th {
+    /* border : 1px solid black; */
+    padding   : 8px;
+    text-align: left;
+}
+
+#highscores tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+#highscores th {
+    padding-top     : 12px;
+    padding-bottom  : 12px;
+    background-color: rgb(208, 255, 0);
+    color           : black;
+
+}
+
+#highscores th:first-child {
+    width       : 100px;
+    text-align  : center;
+    padding-left: 10px;
+}
+
+#highscores th:nth-child(2) {
+    width       : 200px;
+    padding-left: 55px;
+}
+
+#highscores th:last-child {
+    width       : 100px;
+    text-align  : center;
+    padding-left: 10px;
+}
+
+#highscores td:first-child {
+    padding-left: 45px;
+}
+
+#highscores td:nth-child(2) {
+    padding-left: 55px;
+}
+
+#highscores td:nth-child(3) {
+    padding-left: 25px;
+
+}
+
+/* myScore.html */
+#yellowBackground {
+    max-width             : 600px;
+    height                : 400px;
+    /* background-color   : lightgrey; */
+    background-color      : rgb(208, 255, 0);
+    /* border             : 1px solid lightgray; */
+    /* border-radius      : 3px; */
+    margin                : auto;
+    margin-top            : 160px;
+    padding-top           : 40px;
+}
+
+#myTime{
+    font-size: 100px;
+}
+
+#yellowBackground {
+    text-align: center;
+}
+
+.myScoreImput {
+    border: none;
+    padding: 5px;
+    width: 260px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#saveInfoButton {
+    width: 80px;
+    margin-top: 30px;
+}
+
+#saveInfoButton:hover {
+    transition          : all 0.4s ease;
+    /* background-color : #9e45f1; */
+    background-color    : rgb(208, 255, 0);
+    -webkit-transform   : scale(1.1);
+    -ms-transform       : scale(1.1);
+    transform           : scale(1.1);
+}
+
+/* admin.html */
+
+@media only screen and (max-width: 540px){
+    .adminImput{
+        margin-top: 10px;
+    }
+}
+
+#home3 {
+    margin: 1px 0 0 720px;
+}
+
+#messages{
+    margin-top: 30px;
+    text-align: center;
+    font-size: 24px;
+}
+
+form {
+    margin-top: 50px;
+}
+
+#displayOutput {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.outerElement {
+    display      : inline-block;
+    margin-right : 20px;
+    margin-bottom: 20px;
+}
+
+.deleteButton {
+    background-image: url("images/trash.png");
+    width           : 30px;
+    height          : 30px;
+    background-size : contain;
+    display         : none;
+}
+
+.saveOwnPicture {
+    max-width                 : 600px;
+    /* background-color   : lightgrey; */
+    background-color      : rgb(208, 255, 0);
+    /* border             : 1px solid lightgray; */
+    /* border-radius      : 3px; */
+    margin                : auto;
+    margin-top            : 50px;
+    padding-top           : 40px;
+    padding-bottom        : 40px;
+}
+
+.inputbox {
+    text-align: center;
+}
+
+.adminImput {
+    border : none;
+    padding: 5px;
+    width  : 260px;
+}
+
+.adminbuttons {
+    text-align: center;
+    margin-top: 40px;
+
+}
+
+#sendToDatabaseButton:hover,
+#showPictureButton:hover {
+    transition          : all 0.4s ease;
+    /* background-color : #9e45f1; */
+    background-color    : rgb(208, 255, 0);
+    -webkit-transform   : scale(1.1);
+    -ms-transform       : scale(1.1);
+    transform           : scale(1.1);
+}
+
+#nav5{
+    position: relative;
+    margin: auto;
+    max-width: 600px;
+}
+
+#home5 {
+    position: absolute;
+    margin-top: -60px;
+}
+
+/* meme.html */
+#meme {
+    height    : auto;
+    width     : 100%;
+    margin    : auto;
+    margin-top: 25px;
+    display   : block;
+}
+
+#home4 {
+    margin-top : 30px;
+}

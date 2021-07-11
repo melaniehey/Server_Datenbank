@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="client/client.js"></script>
-    <title>Memory!</title>
-    <script src="canvas.js" defer></script>
-    <canvas id="myFirstCanvas"></canvas>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="client/client.js"></script>
+        <title>Memory!</title>
+        <script src="canvas.js" defer></script>
+    </head>
 
-<body>
-    <div id="title">
-        <div id="letsPlay">
-            <h1 class="title1">LET'S</h1>
-            <h1 class="title1">PLAY</h1>
+    <body id="bodyIndex">
+        <canvas id="myFirstCanvas"></canvas>
+        <a href="meme.html" > <img id="smiley" src="Images/smiley.svg" alt="smiley"></a>
+
+        <!-- <img id="smiley" src="Images/smiley.svg" alt="smiley"> -->
+        <div id="title">
+            <div id="letsPlay">
+                <h1 class="title1">LET'S</h1>
+                <h1 class="title1">PLAY</h1>
+            </div>
+
+            <h1 class="title2">MEMORY</h1>
         </div>
+        <nav id="navibereich">
+            <!-- https://de.w3docs.com/snippets/html/wie-kann-man-einen-html-button-der-wie-ein-link-funktioniert-erstellen.html -->
+            <!-- <button id="play" href="play.html" >PLAY</button>   //Test wegen Button über Canvas -->
+            <a id="play" href="play.html">PLAY</a>
+            <a id="score" href="score.html">HIGHSCORES</a>
+            <a id="admin" href="admin.html">ADMIN</a>
+        </nav>
 
-        <h1 class="title2">MEMORY</h1>
-    </div>
-    <nav id="navibereich">
-        <!-- https://de.w3docs.com/snippets/html/wie-kann-man-einen-html-button-der-wie-ein-link-funktioniert-erstellen.html -->
-        <!-- <button id="play" href="play.html" >PLAY</button>   //Test wegen Button über Canvas -->
-        <a id="play" href="play.html">PLAY</a>
-        <a id="score" href="score.html">HIGHSCORES</a>
-        <a id="admin" href="admin.html">ADMIN</a>
-    </nav>
-
-</body>
+    </body>
 
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +9,19 @@
     <script src="client/client.js"></script>
     <title id="myScorePage">Memory</title>
 </head>
-<body>
-    <h1>Form</h1>
-    <form>
-        <label for="name">Name</label>
-        <input type="text" name="PlayerName">
 
-        <button type="button" id="saveInfoButton"> save </button>
+<body>
+    <nav id="nav5">
+        <div id="home5"><a href="index.html"> <img src="Images/house.png" alt="Back home"></a></div>
+    </nav>
+    <form id="yellowBackground">
+        <h1>Your required time: </h1>
+        <div id="myTime"></div>
+        <div>
+            <input class="myScoreImput" type="text" placeholder="Name" required name="PlayerName">
+        </div>
+        <button type="button" id="saveInfoButton"> Save </button>
     </form>
 </body>
+
 </html>

@@ -58,7 +58,10 @@ var Prüfungsabgabe;
             }
             //Bild löschen
             if (url.pathname == "/deletePicture") {
-                let cursor = myDatabasePictures.find(); //weiß er WELCHES bild?
+                //let cursor: Mongo.Cursor = <any>myDatabasePictures.deleteOne("url": url); 
+                //let pictureData: MemoryPicture[] = await cursor.toArray();
+                _response.write(url.query);
+                deletePicture(url.query);
             }
         }
         _response.end();
